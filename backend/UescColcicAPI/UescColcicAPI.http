@@ -1,0 +1,6 @@
+@UescColcicAPI_HostAddress = http://localhost:5207
+
+GET {{UescColcicAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
