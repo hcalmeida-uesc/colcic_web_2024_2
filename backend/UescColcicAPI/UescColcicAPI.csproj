@@ -10,4 +10,9 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="../UescColcicAPI.Service/UescColcicAPI.Services.csproj" />
+    <ProjectReference Include="..\UescColcicAPI.Core\UescColcicAPI.Core.csproj" />
+  </ItemGroup>
+
 </Project>

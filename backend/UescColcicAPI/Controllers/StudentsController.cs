@@ -1,5 +1,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using UescColcicAPI.Services.BD.Interfaces;
+using UescColcicAPI.Core;
 
 namespace UescColcicAPI.Controllers;
 
@@ -7,17 +9,17 @@ namespace UescColcicAPI.Controllers;
     [Route("api/[controller]")]
     public class StudentsController : ControllerBase
     {
-        private static readonly List<Student> Students = new()
-        {
-            new Student { Name = "Douglas", Email = "douglas.cic@uesc.br" },
-            new Student { Name = "Estevão", Email = "estevao.cic@uesc.br" },
-            new Student { Name = "Gabriel", Email = "gabriel.cic@uesc.br" },
-            new Student { Name = "Gabriela", Email = "gabriela.cic@uesc.br" }
-        };
+        private readonly IStudentsCRUD _studentsCRUD;
 
+        public StudentsController(IStudentsCRUD studentsCRUD)
+        {
+            _studentsCRUD = studentsCRUD;
+        }
+
+       
         [HttpGet(Name = "GetStudentsNames")]
         public IEnumerable<Student> Get()
         {
-            return Students.ToArray();
+            return _studentsCRUD.ReadAll();
         }
     }
