@@ -15,6 +15,6 @@ public class UescColcicDBContext : DbContext
 
    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
    {
-       optionsBuilder.UseSqlite();
+       optionsBuilder.UseSqlite("Data Source=UescColcicAPI.db");
    }
 }
