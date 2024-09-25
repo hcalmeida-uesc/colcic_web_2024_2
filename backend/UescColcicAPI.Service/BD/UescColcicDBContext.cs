@@ -6,7 +6,7 @@ namespace UescColcicAPI.Services.BD;
 
 public class UescColcicDBContext : DbContext
 {
-   DbSet<Student> Students { get; set; }
+   public DbSet<Student> Students { get; set; }
 
    protected override void OnModelCreating(ModelBuilder modelBuilder)
    {
@@ -15,6 +15,6 @@ public class UescColcicDBContext : DbContext
 
    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
    {
-       optionsBuilder.UseSqlite("Data Source=UescColcicAPI.db");
+       optionsBuilder.UseSqlite("Data Source=/home/helder/_dev/colcic_web_2024_2/backend/UescColcicAPI/UescColcicAPI.db");
    }
 }

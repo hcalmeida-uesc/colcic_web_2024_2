@@ -17,6 +17,18 @@ namespace UescColcicAPI.Controllers;
             _studentsCRUD = studentsCRUD;
         }
 
+        [HttpPost(Name = "CreateStudent")]
+        public IActionResult Post([FromBody] Student student)
+        {
+            if (student == null)
+            {
+                return BadRequest();
+            }
+
+            _studentsCRUD.Create(student);
+
+            return CreatedAtAction(nameof(Get), new { id = student.StudentId }, student);
+        }
        
         [HttpGet(Name = "GetStudents")]
         public IEnumerable<Student> Get()

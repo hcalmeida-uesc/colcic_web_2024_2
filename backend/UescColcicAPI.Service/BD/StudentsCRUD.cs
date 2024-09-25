@@ -1,32 +1,35 @@
 ﻿using UescColcicAPI.Services.BD.Interfaces;
 using UescColcicAPI.Core;
+using Microsoft.EntityFrameworkCore;
+using SQLitePCL;
 
 namespace UescColcicAPI.Services.BD;
 
 public class StudentsCRUD : IStudentsCRUD
 {
-    private static readonly List<Student> Students = new()
-   {
-      new Student { StudentId = 1, Name = "Douglas", Email = "douglas.cic@uesc.br" },
-      new Student { StudentId = 2, Name = "Estevão", Email = "estevao.cic@uesc.br" },
-      new Student { StudentId = 3, Name = "Gabriel", Email = "gabriel.cic@uesc.br" },
-      new Student { StudentId = 4, Name = "Gabriela", Email = "gabriela.cic@uesc.br" }
-   };
+    private UescColcicDBContext _context;
+   public StudentsCRUD(UescColcicDBContext context){
+        _context = context;
+   }
     public void Create(Student entity)
     {
-        Students.Add(entity);
+        _context.Students.Add(entity);
+        _context.SaveChanges();
     }
 
     public void Delete(Student entity)
     {   
         var student = this.Find(entity.Email);
-        if(student is  not null)
-            Students.Remove(student);
+        if(student is  not null){
+            _context.Students.Remove(student);
+
+            _context.SaveChanges();
+        }
     }
 
     public IEnumerable<Student> ReadAll()
     {
-        return Students;
+        return _context.Students;
     }
 
     public Student? ReadById(int id)
@@ -37,18 +40,23 @@ public class StudentsCRUD : IStudentsCRUD
 
     public void Update(Student entity)
     {
-        var student = this.Find(entity.Email);
-        if(student is not null) student.Name = entity.Name;
+        var student = this.Find(entity.StudentId);
+        if(student is not null)
+        {
+            student.Name = entity.Name;
+            student.Email = entity.Email;
+            _context.SaveChanges();
+        }
     }
 
     private Student? Find(string email)
     {
-        return Students.FirstOrDefault(x => x.Email == email);
+        return _context.Students.FirstOrDefault(x => x.Email == email);
     }
 
     private Student? Find(int id)
     {
-        return Students.FirstOrDefault(x => x.StudentId == id);
+        return _context.Students.FirstOrDefault(x => x.StudentId == id);
     }
 
 }
