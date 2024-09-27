@@ -295,4 +295,8 @@ __pycache__/
 # Personalized 
 
 ### SQLITE
-*.db*
+*.db
+*.db-shm
+*.db-wal
+*.sqlite
+
