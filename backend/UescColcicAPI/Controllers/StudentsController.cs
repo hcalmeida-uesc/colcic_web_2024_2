@@ -66,4 +66,17 @@ namespace UescColcicAPI.Controllers;
         {
             _studentsCRUD.Delete(entity);
         }
+
+        [HttpPost("skill/{studentId}", Name = "CreateStudentSkill")]
+        public IActionResult PostSkill([FromBody] Skill skill, int studentId)
+        {
+            if (skill == null)
+            {
+                return BadRequest();
+            }
+
+            _studentsCRUD.CreateSkill(studentId, skill);
+
+            return Created();
+        }
     }

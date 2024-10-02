@@ -49,6 +49,21 @@ public class StudentsCRUD : IStudentsCRUD
         }
     }
 
+    public Student? CreateSkill(int studentId, Skill skill)
+    {
+        var student = this.Find(studentId);
+        if(student is not null)
+        {
+            if(student.Skills is null)
+            {
+                student.Skills = new List<Skill>();
+            }
+            student.Skills.Add(skill);
+            _context.SaveChanges();
+        }
+        return student;
+    }
+
     private Student? Find(string email)
     {
         return _context.Students.FirstOrDefault(x => x.Email == email);
