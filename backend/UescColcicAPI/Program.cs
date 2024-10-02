@@ -16,6 +16,7 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
@@ -25,6 +26,15 @@ if (app.Environment.IsDevelopment())
 
 app.UseAuthorization();
 
+app.Use(async (context,next) =>
+{
+    context.Response.Headers.Append("App-Name","ColcicAPIUesc");
+    
+    await next.Invoke();
+
+});
+
 app.MapControllers();
+
 
 app.Run();
