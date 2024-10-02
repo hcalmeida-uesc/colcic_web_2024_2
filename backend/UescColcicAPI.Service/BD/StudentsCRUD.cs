@@ -29,7 +29,7 @@ public class StudentsCRUD : IStudentsCRUD
 
     public IEnumerable<Student> ReadAll()
     {
-        return _context.Students;
+        return _context.Students.Include(s => s.Skills);
     }
 
     public Student? ReadById(int id)
@@ -66,12 +66,12 @@ public class StudentsCRUD : IStudentsCRUD
 
     private Student? Find(string email)
     {
-        return _context.Students.FirstOrDefault(x => x.Email == email);
+        return _context.Students.Include(s => s.Skills).FirstOrDefault(x => x.Email == email);
     }
 
     private Student? Find(int id)
     {
-        return _context.Students.FirstOrDefault(x => x.StudentId == id);
+        return _context.Students.Include(s => s.Skills).FirstOrDefault(x => x.StudentId == id);
     }
 
 }
