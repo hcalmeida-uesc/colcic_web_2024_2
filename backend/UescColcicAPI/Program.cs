@@ -1,3 +1,4 @@
+using UescColcicAPI.Middlewares;
 using UescColcicAPI.Services.BD;
 using UescColcicAPI.Services.BD.Interfaces;
 
@@ -26,13 +27,9 @@ if (app.Environment.IsDevelopment())
 
 app.UseAuthorization();
 
-app.Use(async (context,next) =>
-{
-    context.Response.Headers.Append("App-Name","ColcicAPIUesc");
-    
-    await next.Invoke();
+app.UseMiddleware<GetRequestHeaderMiddleware>();
 
-});
+app.UseMiddleware<ResponseAppendMiddleware>();
 
 app.MapControllers();
 
