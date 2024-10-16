@@ -13,11 +13,11 @@ public class GetRequestHeaderMiddleware
    
       public async Task Invoke(HttpContext context)
       {
-         var header = context.Request.Headers["X-App-Login-User"];
+         var header = context.Request.Headers["Authorization"];
 
          DateTimeOffset now = DateTimeOffset.Now;
 
-         Console.WriteLine("Primeiro Middleware + " + now);
+         Console.WriteLine("Authorization: " + header.ToString());
    
          await _next.Invoke(context);
 

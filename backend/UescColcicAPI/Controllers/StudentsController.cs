@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using UescColcicAPI.Services.BD.Interfaces;
 using UescColcicAPI.Core;
 using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.Authorization;
 
 namespace UescColcicAPI.Controllers;
 
@@ -31,6 +32,7 @@ namespace UescColcicAPI.Controllers;
         }
        
         [HttpGet(Name = "GetStudents")]
+        [Authorize]
         public IEnumerable<Student> Get()
         {
             return _studentsCRUD.ReadAll();

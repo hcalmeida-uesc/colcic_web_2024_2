@@ -2,6 +2,7 @@ using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using UescColcicAPI.Middlewares;
+using UescColcicAPI.Services.Auth;
 using UescColcicAPI.Services.BD;
 using UescColcicAPI.Services.BD.Interfaces;
 
@@ -35,6 +36,7 @@ builder.Services.AddControllers();
 
 builder.Services.AddDbContext<UescColcicDBContext>();
 builder.Services.AddScoped<IStudentsCRUD, StudentsCRUD>();
+builder.Services.AddScoped<AuthService>();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

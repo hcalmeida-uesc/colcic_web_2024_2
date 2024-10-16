@@ -17,6 +17,6 @@ public class ResponseAppendMiddleware
          Console.WriteLine("Segundo Middleware");
          
    
-         //await _next.Invoke(context);
+         await _next.Invoke(context);
       }
 }
