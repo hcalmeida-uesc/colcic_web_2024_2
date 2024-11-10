@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Calculadora de Fatorial</title>
+</head>
+<body>
+    <h2>Calculadora de Fatorial (WebAssembly)</h2>
+    <input type="number" id="number" placeholder="Digite um número">
+    <button onclick="calculateFactorial()">Calcular</button>
+    <p>Resultado: <span id="result"></span></p>
+
+    <script src="factorial.js"></script>
+    <script>
+        function calculateFactorial() {
+            const num = parseInt(document.getElementById("number").value);
+            if (Module && num >= 0) {
+                const result = Module.ccall('factorial', 'int', ['int'], [num]);
+                document.getElementById("result").innerText = result;
+            }
+        }
+    </script>
+</body>
+</html>

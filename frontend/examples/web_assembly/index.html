@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Hello WebAssembly</title>
+</head>
+<body>
+    <h1 id="output">Hello, Html!</h1>
+    <script src="hello.js"></script>
+    <script>
+        Module.onRuntimeInitialized = () => {
+            document.getElementById("output").innerText = Module.ccall('hello', 'string');
+        };
+    </script>
+</body>
+</html>
