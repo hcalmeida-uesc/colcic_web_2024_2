@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulário de Cadastro - HTML Puro</title>
+    <style>
+      body {
+         font-family: Arial, sans-serif;
+         display: flex;
+         flex-direction: column;
+         align-items: center;
+      }
+
+      form {
+         width: 300px;
+         display: flex;
+         flex-direction: column;
+      }
+
+      label, input, button {
+         margin: 10px 0;
+      }
+
+      button {
+         padding: 8px;
+         background-color: #4CAF50;
+         color: white;
+         border: none;
+         cursor: pointer;
+      }
+
+      button:hover {
+         background-color: #45a049;
+      }
+
+    </style>
+</head>
+<body>
+
+    <h1>Cadastro de Usuário</h1>
+    
+    <form id="cadastroForm">
+        <label for="nome">Nome:</label>
+        <input type="text" id="nome" required>
+        
+        <label for="email">Email:</label>
+        <input type="email" id="email" required>
+        
+        <label for="senha">Senha:</label>
+        <input type="password" id="senha" required>
+        
+        <button type="submit">Cadastrar</button>
+    </form>
+    
+    <div id="mensagem"></div>
+
+    <script>
+      document.getElementById("cadastroForm").addEventListener("submit", function(event) {
+         event.preventDefault();
+         const nome = document.getElementById("nome").value;
+         const email = document.getElementById("email").value;
+         const senha = document.getElementById("senha").value;
+
+         if (nome && email && senha) {
+            if (!validarEmail(email)) {
+               document.getElementById("mensagem").innerText = "Por favor, preencha um email válido.";
+            }else{
+               document.getElementById("mensagem").innerText = "Cadastro realizado com sucesso!";
+            }
+         } else {
+            document.getElementById("mensagem").innerText = "Por favor, preencha todos os campos.";
+         }
+      });
+
+      function validarEmail(email) {
+         const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+         return re.test(email);
+      }
+    </script>
+</body>
+</html>

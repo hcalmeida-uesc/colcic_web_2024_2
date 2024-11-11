@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulário de Cadastro - Bootstrap</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="d-flex justify-content-center align-items-center vh-100">
+
+    <div class="container">
+        <h1 class="text-center">Cadastro de Usuário</h1>
+        
+        <form id="cadastroForm" class="mx-auto mt-3 p-4 border rounded bg-light" style="max-width: 400px;">
+            <div class="form-group">
+                <label for="nome">Nome:</label>
+                <input type="text" id="nome" class="form-control" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" class="form-control" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="senha">Senha:</label>
+                <input type="password" id="senha" class="form-control" required>
+            </div>
+            
+            <button type="submit" class="btn btn-primary btn-block">Cadastrar</button>
+        </form>
+        
+        <div id="mensagem" class="text-center mt-3"></div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script>
+        $("#cadastroForm").on("submit", function(event) {
+            event.preventDefault();
+            const nome = $("#nome").val();
+            const email = $("#email").val();
+            const senha = $("#senha").val();
+
+            if (nome && email && senha) {
+                $("#mensagem").text("Cadastro realizado com sucesso!").addClass("text-success");
+            } else {
+                $("#mensagem").text("Por favor, preencha todos os campos.").addClass("text-danger");
+            }
+        });
+    </script>
+</body>
+</html>
